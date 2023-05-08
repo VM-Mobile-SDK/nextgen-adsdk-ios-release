@@ -26,7 +26,6 @@ jobs:
           
           echo "::group::update_package.sh"
           sh ./update_package.sh $release_tag AdSDKCore AdSDKCore.xcframework.zip
-          cat myPackage/Package.swift
           echo "::endgroup::"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -36,7 +35,7 @@ jobs:
           author_name: swift package deployer
           author_email: mail@example.com
           message: 'Updated swift package definition'
-          add: 'myPackage/Package.swift'
+          add: 'AdSDKCore/Package.swift'
           tag: ${{ env.tag }} --force
           push: origin HEAD:main
           tag_push: --force
