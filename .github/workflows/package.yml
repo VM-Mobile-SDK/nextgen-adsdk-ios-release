@@ -1,6 +1,8 @@
 name: Update Swift Package
 on: 
-  workflow_dispatch:
+  push:
+    tags:
+      - "*.*.*"
 
 permissions:
   contents: write
@@ -12,11 +14,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Fetch URL for library asset
-        id: fetch_asset_url
+      - name: Update package
+        id: update_package
         run: |
-          sh ./update_package.sh 0.0.12 AdSDKCore.xcframework.zip
+          echo "::group::determining release tag"
+          ref=${{ github.ref }} 
+          release_tag="${ref##*refs/tags/}" 
+          echo "tag=$release_tag" >> "$GITHUB_ENV"
+          echo $release_tag
+          echo "::endgroup::"
+          
+          echo "::group::update_package.sh"
+          sh ./update_package.sh $release_tag AdSDKCore AdSDKCore.xcframework.zip
           cat myPackage/Package.swift
+          echo "::endgroup::"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Commit changes
@@ -26,7 +37,8 @@ jobs:
           author_email: mail@example.com
           message: 'Updated swift package definition'
           add: 'myPackage/Package.swift'
-          tag: 0.0.12 --force
+          tag: ${{ env.tag }} --force
+          push: origin HEAD:main
           tag_push: --force
           
 
