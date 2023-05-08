@@ -55,9 +55,8 @@ fi
 
 # then we use swift package compute-checksum 
 # this needs to be run in the directory containing the Package.swift file
-cd $libraryName
 
-checksum="$(swift package compute-checksum ../AdSDKCore.xcframework.zip)"
+checksum="$(swift package compute-checksum AdSDKCore.xcframework.zip)"
 echo "checksum: $checksum"
 
 # Now we need to put the url and the checksum in the Package.swift file
