@@ -1,0 +1,38 @@
+name: Update Swift Package
+on: 
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  get_artifact_url:
+    name: Update Swift Package
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Fetch URL for library asset
+        id: fetch_asset_url
+        run: |
+          sh ./update_package.sh 0.0.12 AdSDKCore.xcframework.zip
+          cat myPackage/Package.swift
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: swift package deployer
+          author_email: mail@example.com
+          message: 'Updated swift package definition'
+          add: 'myPackage/Package.swift'
+          tag: 0.0.12 --force
+          tag_push: --force
+          
+
+        
+      
+    
+          
+          
+      
