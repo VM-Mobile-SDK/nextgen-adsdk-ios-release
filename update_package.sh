@@ -56,6 +56,7 @@ fi
 # then we use swift package compute-checksum 
 # this needs to be run in the directory containing the Package.swift file
 
+touch Package.swift
 checksum="$(swift package compute-checksum AdSDKCore.xcframework.zip)"
 echo "checksum: $checksum"
 
