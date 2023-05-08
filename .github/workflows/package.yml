@@ -35,7 +35,7 @@ jobs:
           author_name: swift package deployer
           author_email: mail@example.com
           message: 'Updated swift package definition'
-          add: 'AdSDKCore/Package.swift'
+          add: 'Package.swift'
           tag: ${{ env.tag }} --force
           push: origin HEAD:main
           tag_push: --force
