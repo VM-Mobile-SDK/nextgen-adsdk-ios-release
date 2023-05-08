@@ -24,8 +24,8 @@ let package = Package(
 			// a good way to do this is by adding a private token
 			// and then setting up your .netrc file
 			// we will provide a detailed howto in the future
-            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/107237219.zip",
-            checksum: "a231bd97aa79ba70ef71a08ec873fb44b8f463d229a93f9d624e799b5c63c599"
+            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/107238472.zip",
+            checksum: "b169a117044d2cd78894b1d6159b63a8c126856e4974fb852fb7a3ab451d35ac"
         )
     ]
 
