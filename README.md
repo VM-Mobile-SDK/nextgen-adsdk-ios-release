@@ -1,2 +1,2 @@
-# nextgen-adsdk-ios-artifacts
+# nextgen-adsdk-ios-release
 Contains the build artifacts for the nextgen AdSDK for iOS 
