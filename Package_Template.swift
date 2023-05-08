@@ -24,7 +24,7 @@ let package = Package(
 			// a good way to do this is by adding a private token
 			// and then setting up your .netrc file
 			// we will provide a detailed howto in the future
-            url: "%%url%%",
+            url: "%%url%%.zip",
             checksum: "%%checksum%%"
         )
     ]
