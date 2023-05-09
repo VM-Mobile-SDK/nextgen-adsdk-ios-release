@@ -1,14 +1,28 @@
 # nextgen-adsdk-ios-release
 This package contains the frameworks for using Aditions nextgen AdSDK for iOS.
 
+## Authorization
+
+* Pick a github account that has read access to the repo containing the release.
+* Generate a private access token for this account.
+* Update your ~/.netrc file. 
+
+Your ~/.netrc file should contain an entry like this
+
+´´´
+machine api.github.com login <your-github-account-name> password <your-github-private-access-token>
+´´´
+
 ## Adding the package
 
 1. In Xcode, select "Add Package" from the File menu. 
-2. In the dialogue, paste the URL to this repo. 
-3. Make sure to only include the base URL, e.g. `https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release`
-4. When prompted for authorization, select login -> Use Github Account
-5. Login by providing the account you use to access this repo and a valid personal access token
+1. In the dialogue, paste the URL to this repo. 
+1. Make sure to only include the base URL, e.g. `https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release`
+1. When prompted for authorization, select login -> Use Github Account
+1. Login by providing the account you use to access this repo and a valid personal access token
 
+If Xcode can see the package but fails to download the framework binaries, then it's likely that your authorization for the github API did fail. Doublecheck your .netrc configuration, see section 'Authorization' above.
+	
 Xcode will then add the package as a dependency.
 
 ## Compile Time Settings
