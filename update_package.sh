@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# This is part of the automated deployment of the AdSDK 
+# If you are an user of the SDK you can ignore this file.
+#
 # This script will update the swift package definition
-# It requires two arguements:
+# It requires five arguements:
 # - github release
 # - the file name of the asset of the release to be used; this is usually a zipped xcframework
 # - the name of the library to use as part of the swift package declaration
