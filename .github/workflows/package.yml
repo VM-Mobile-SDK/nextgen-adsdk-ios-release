@@ -25,7 +25,7 @@ jobs:
           echo "::endgroup::"
           
           echo "::group::update_package.sh"
-          sh ./update_package.sh $release_tag AdSDKCore AdSDKCore.xcframework.zip
+          sh ./update_package.sh $release_tag AdSDKCore AdSDKCore.xcframework.zip AdSDKSwiftUI AdSDKSwiftUI.xcframework.zip
           echo "::endgroup::"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -40,10 +40,3 @@ jobs:
           push: origin HEAD:main
           tag_push: --force
           
-
-        
-      
-    
-          
-          
-      
