@@ -5,9 +5,11 @@
 #
 # This script will update the swift package definition
 # It requires five arguements:
-# - github release
-# - the file name of the asset of the release to be used; this is usually a zipped xcframework
-# - the name of the library to use as part of the swift package declaration
+# 1. github release
+# 2. the name of the core library to use as part of the swift package declaration
+# 3. the file name of the core library asset of the release to be used; this is usually a zipped xcframework
+# 4. the name of the swiftUI library to use as part of the swift package declaration
+# 5. the file name of the swiftUI library asset of the release to be used; this is usually a zipped xcframework
 
 if [ $# -lt 5 ]; then 
   	echo "Please supply a github release, library names and an asset names for the core and swiftUI libraries"
@@ -86,7 +88,6 @@ fi
 
 swiftUIChecksum="$(swift package compute-checksum $swiftUIAssetName)"
 
-
 if [ -z "$coreChecksum" ]; then
     echo "failed to calculate checksum for $swiftUIAssetName"
     exit 1
@@ -99,4 +100,5 @@ fi
 # We have a template for this and do a search/replace 
 sed "s+%%coreUrl%%+$coreUrl+g; s+%%swiftUIUrl%%+$swiftUIUrl+g; s+%%coreChecksum%%+$coreChecksum+g; s+%%swiftUIChecksum%%+$swiftUIChecksum+g; s+%%coreLibraryName%%+$coreLibraryName+g; s+%%swiftUILibraryName%%+$swiftUILibraryName+g;" Package_Template.swift > Package.swift
 
+# Print out for debugging purposes
 cat Package.swift
