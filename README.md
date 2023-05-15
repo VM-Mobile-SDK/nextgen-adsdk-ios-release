@@ -25,11 +25,12 @@ Xcode will then add the package as a dependency.
 
 ## Compile Time Settings
 
-In your Info.plist file, add two new keys: `AD_TYPES` and `BASE_URL`.
+In your Info.plist file, add three new keys: `AD_TYPES`, `BASE_URL`, and `TAG_BASE_URL` .
 
 `AD_TYPES` allows you to specify the ad types you want to support in your app. Right now, the only valid option is this string: "nativeimg,customnative". This tells the Adition AdServer that the SDK and the app support native image ads and custom native ads.
 
-`BASE_URL` allows you to specify the name of the AdServer. Please use `adsdk.adfarm1.adition.com`.
+`BASE_URL` allows you to specify the baseUrl of the AdServer. Please use `adsdk.adfarm1.adition.com`.
+`TAG_BASE_URL` allows you to specify the baseUrl for the tag requests. Please use `ad1.adfarm1.adition.com` for now.
 
 ## Using the SDK
 
