@@ -24,8 +24,8 @@ let package = Package(
 		// we will provide a detailed howto in the future
         .binaryTarget(
             name: "AdSDKCore",
-            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/107346811.zip",
-            checksum: "98e0bbd1f235a7213647e523ef72800d6e4c8978140024abca1f639e40723718"
+            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/108264264.zip",
+            checksum: "58fed5a796a072d09e1de9d8a2d2298d40dd2b925b995d0244e32025521d8671"
         ),
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
@@ -37,8 +37,8 @@ let package = Package(
 	    
         .binaryTarget(
             name: "AdSDKSwiftUI",
-            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/107346810.zip",
-            checksum: "5d1e4d47d03430b4aa5286ee63a098e0c772032d11d9e976279efab649954e2f"
+            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/108264265.zip",
+            checksum: "2dd8ce9b4fc0c3ff1898601a1aa7d3d19a8a101f121cef3932300d2a0dc45aa0"
         )
     ]
 
