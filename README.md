@@ -11,6 +11,14 @@ Your `~/.netrc` file should contain an entry like this
 
 `machine api.github.com login <your-github-account-name> password <your-github-private-access-token>`
 
+Alternatively, you can add the private token to the MacOS keychain. Open the Keychain app and create an internet password:
+
+```
+Keychain Item Name: api.github.com
+Account Name: GitHub user name
+Password: personal access token
+```
+
 ## Adding the package
 
 1. In Xcode, select "Add Package" from the File menu. 
@@ -22,6 +30,9 @@ Your `~/.netrc` file should contain an entry like this
 If Xcode can see the package but fails to download the framework binaries, then it's likely that your authorization for the github API did fail. Doublecheck your .netrc configuration, see section 'Authorization' above.
 	
 Xcode will then add the package as a dependency.
+
+Distributing binary libraries via github-hosted private repos is a recent addition (2022) to Xcode & SPM. Expect things to be flaky and to occasionally restart Xcode.
+Further reading: https://blog.eidinger.info/xcode-133-supports-spm-binary-dependency-in-private-github-release
 
 ## Compile Time Settings
 
