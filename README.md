@@ -3,21 +3,8 @@ This package contains the frameworks for using Aditions nextgen AdSDK for iOS.
 
 ## Authorization
 
-* Pick a github account that has read access to the repo containing the release.
-* Generate a private access token for this account.
-* Update your `~/.netrc` file. 
+The Repo has been marked "public", so no authorization needed.
 
-Your `~/.netrc` file should contain an entry like this
-
-`machine api.github.com login <your-github-account-name> password <your-github-private-access-token>`
-
-Alternatively, you can add the private token to the MacOS keychain. Open the Keychain app and create an internet password:
-
-```
-Keychain Item Name: api.github.com
-Account Name: GitHub user name
-Password: personal access token
-```
 
 ## Adding the package
 
