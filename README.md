@@ -21,16 +21,6 @@ Xcode will then add the package as a dependency.
 Distributing binary libraries via github-hosted private repos is a recent addition (2022) to Xcode & SPM. Expect things to be flaky and to occasionally restart Xcode.
 Further reading: https://blog.eidinger.info/xcode-133-supports-spm-binary-dependency-in-private-github-release
 
-## Compile Time Settings
-
-In your Info.plist file, add three new keys: `AD_TYPES`, `BASE_URL`, and `TAG_BASE_URL` .
-
-`AD_TYPES` allows you to specify the ad types you want to support in your app. Right now, the only valid option is this string: "nativeimg,customnative". This tells the Adition AdServer that the SDK and the app support native image ads and custom native ads.
-
-`BASE_URL` allows you to specify the baseUrl of the AdServer. Please use `https://adsdk.adfarm1.adition.com`.
-
-`TAG_BASE_URL` allows you to specify the baseUrl for the tag requests. Please use `https://ad1.adfarm1.adition.com` for now.
-
 ## Using the SDK
 
 ## Initialize and configure the AdService
