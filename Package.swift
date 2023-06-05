@@ -14,13 +14,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "AdSDKCore",
-            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/111317695.zip",
-            checksum: "d50b685d4624dffd562a8f14852d0383fbd62dceac946a009cd8944369cd07bf"
+            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/111348551.zip",
+            checksum: "616e0ff8a72a469b1c8abcaadb4cc1ce57b267069f065ae22292f7a3cfc92897"
         ),
         .binaryTarget(
             name: "AdSDKSwiftUI",
-            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/111317696.zip",
-            checksum: "9073cc32aa0dd768bd9fcf67b2b9bc6467cb7a193376900b23363f53d3acdf07"
+            url: "https://api.github.com/repos/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/assets/111348550.zip",
+            checksum: "c04fbe87844b46fadcf6540d5206fe654f14b5ba6dee045b25760eaedbd6b7a1"
         )
     ]
 )
