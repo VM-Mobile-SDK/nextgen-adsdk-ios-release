@@ -3,18 +3,13 @@ This package contains the frameworks for using Aditions nextgen AdSDK for iOS.
 
 ## Authorization
 
-The Repo has been marked "public", so no authorization needed.
-
+The Repo has been marked "public", so no authentication or authorization needed.
 
 ## Adding the package
 
 1. In Xcode, select "Add Package" from the File menu. 
 1. In the dialogue, paste the URL to this repo. 
 1. Make sure to only include the base URL, e.g. `https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release`
-1. When prompted for authorization, select login -> Use Github Account
-1. Login by providing the account you use to access this repo and a valid personal access token
-
-If Xcode can see the package but fails to download the framework binaries, then it's likely that your authorization for the github API did fail. Doublecheck your .netrc configuration, see section 'Authorization' above.
 	
 Xcode will then add the package as a dependency.
 
