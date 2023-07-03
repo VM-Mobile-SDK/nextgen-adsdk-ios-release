@@ -156,7 +156,15 @@ struct AdCell: View {
 
 ```
 
-The advertisement will emit events during its lifecycle: `loading`, `caching`, `readyToPresent` and, conditionally, `error`. 
+Advertisements will emit two types of events:
+
+Lifecycle vents: `loading`, `caching`, `readyToPresent` and, conditionally, `error`
+and tracking events: 
+
+* tap(url:data:) - user triggered an URL, for example by tapping on an Ad
+* impression(url:data:) - the ad has been rendered, irregardless if it has been seen by the user or not. Can be triggered if the add is outside of the viewport
+* viewable(percentage:url:data:) At least 1%/50%/100% of the Ad has been actually seen by the user
+
 
 You can observe them like this:
 
@@ -200,6 +208,19 @@ You can observe them like this:
 
 ```
 
+To enable the partial visibility events  ``AdEvent/viewable(percentage:url:data:)``, you have to add the .adsContainer() modifier:
+
+```swift
+var body: some View {
+	List {
+		ForEach(cellViewModels) {
+			AdCell(viewModel: $0)
+		}
+	}
+	.clipped()
+	.adsContainer()
+}
+```
 
 
 
