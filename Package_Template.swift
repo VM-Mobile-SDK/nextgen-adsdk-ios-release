@@ -14,12 +14,12 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "%%coreLibraryName%%",
-            url: "%%coreUrl%%.zip",
+            url: "%%coreUrl%%",
             checksum: "%%coreChecksum%%"
         ),
         .binaryTarget(
             name: "%%swiftUILibraryName%%",
-            url: "%%swiftUIUrl%%.zip",
+            url: "%%swiftUIUrl%%",
             checksum: "%%swiftUIChecksum%%"
         )
     ]
