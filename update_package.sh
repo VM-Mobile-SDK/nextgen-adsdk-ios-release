@@ -42,8 +42,8 @@ fi
 # we use this to get the list of assets associated with a release
 # one of these assets is the zip file containing the xcframework asset
 # we pass the output of gh through a jq filter to only return those asset urls that mach the library name
-coreUrl="$(gh release view $release --json assets -q ".assets[] | select(.name | test(\"$coreAssetName\")) | .apiUrl")"
-swiftUIUrl="$(gh release view $release --json assets -q ".assets[] | select(.name | test(\"$swiftUIAssetName\")) | .apiUrl")"
+coreUrl="$(gh release view $release --json assets -q ".assets[] | select(.name | test(\"$coreAssetName\")) | .url")"
+swiftUIUrl="$(gh release view $release --json assets -q ".assets[] | select(.name | test(\"$swiftUIAssetName\")) | .url")"
 
 # we will put this URL in the swift package declaration later
 echo "URL for core asset: $coreUrl"
