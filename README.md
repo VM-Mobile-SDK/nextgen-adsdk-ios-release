@@ -13,9 +13,6 @@ The Repo has been marked "public", so no authentication or authorization needed.
 	
 Xcode will then add the package as a dependency.
 
-Distributing binary libraries via github-hosted private repos is a recent addition (2022) to Xcode & SPM. Expect things to be flaky and to occasionally restart Xcode.
-Further reading: https://blog.eidinger.info/xcode-133-supports-spm-binary-dependency-in-private-github-release
-
 ## Using the SDK
 
 ## Initialize and configure the AdService
@@ -221,7 +218,9 @@ var body: some View {
 	.adsContainer()
 }
 ```
+## Aditional documentation
 
+You can find the documentation here: https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/documentation/adsdkcore/
 
 
 
