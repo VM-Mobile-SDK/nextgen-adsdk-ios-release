@@ -155,7 +155,7 @@ struct AdCell: View {
 
 Advertisements will emit two types of events:
 
-Lifecycle vents: `loading`, `caching`, `readyToPresent` and, conditionally, `error`
+Lifecycle vents: `loading`, `caching`, `readyToPresent(metadata:)` and, conditionally, `error`
 and tracking events: 
 
 * tap(url:data:) - user triggered an URL, for example by tapping on an Ad
@@ -177,7 +177,11 @@ You can observe them like this:
                 case .loading, .caching:
                     self.state = .loading
 
-                case .readyToPresent:
+                case .readyToPresent(let metadata):
+                    if let metadata {
+			print(metadata)
+		    }
+
                     self.state = .view
 
                 case .error(let error):
