@@ -17,18 +17,114 @@ Xcode will then add the package as a dependency.
 
 ## Initialize and configure the AdService
 
-In your app delegate, import AdSDKCore and initialize and configure the AdService.
+There are two ways to create and configure an AdService. You can choose the one you prefer.
+
+1. In your app delegate, import AdSDKCore and AdSDKSwiftUI and call the static `configure` method of the AdService class.
+
+Here's an example:
+```swift
+
+import UIKit
+import Combine
+import AdSDKCore
+import AdSDKSwiftUI
+
+final class AppDelegate: NSObject {
+    // MARK: - Internal Properties
+    var adService: AdService?
+    private(set) lazy var statePublisher = stateSubject
+        .eraseToAnyPublisher()
+
+    // MARK: - Private Properties
+    private let stateSubject = CurrentValueSubject<State, Never>(.loading)
+    private var subscription: AnyCancellable?
+}
+
+// MARK: - UIApplicationDelegate
+extension AppDelegate: UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        configure()
+        return true
+    }
+}
+
+// MARK: - Internal Methods
+extension AppDelegate {
+    func configure() {
+        configureWithCombine()
+//        configureWithAsync()
+    }
+}
+
+// MARK: - Private Methods
+extension AppDelegate {
+    func configureWithCombine() {
+        subscription = AdService.configure(
+            networkID: C.networkID,
+            cacheSize: 50, // Can be ignored
+            timeout: 60 // Can be ignored
+        )
+        .sink { [unowned self] completion in
+            switch completion {
+            case .failure(let error):
+                stateSubject.send(.error(error.description))
+                print(error.description)
+            case .finished:
+                print("Config: AdService configured")
+                stateSubject.send(.configured)
+            }
+
+        } receiveValue: { [unowned self] adService in
+            self.adService = adService
+        }
+    }
+
+    func configureWithAsync() {
+        Task {
+            do {
+                adService = try await AdService.configure(networkID: C.networkID)
+                await MainActor.run {
+                    stateSubject.send(.configured)
+                }
+
+            } catch {
+                guard let adError = error as? AdError else {
+                    print(error)
+                    return
+                }
+
+                await MainActor.run {
+                    stateSubject.send(.error(adError.description))
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Models
+extension AppDelegate {
+    enum State {
+        case loading
+        case configured
+        case error(_ description: String)
+    }
+}
+
+// MARK: - Static Properties
+private enum C {
+    static let networkID: UInt = 1800
+}
+
+```
+
+2. In your app delegate, import AdSDKCore and initialize and configure the AdService.
 
 Here's an example:
 
 ```swift
-
-//
-//  AppDelegate.swift
-//  AdSDKDemo
-//
-//  Created by Artem Kvasnetskyi on 19.04.2023.
-//
 
 import UIKit
 import Combine
@@ -122,9 +218,10 @@ private enum C {
 Use an adService instance to make an advertisement.
 
 ```swift
-  let ad = try adService.makeAdvertisement(
-                request: .init(contentUnit: 4810915)
-            )
+
+    let ad = try adService.makeAdvertisement(
+        request: .init(contentUnit: 4810915)
+    )
 
 ```
 
@@ -161,51 +258,87 @@ and tracking events:
 * tap(url:data:) - user triggered an URL, for example by tapping on an Ad
 * impression(url:data:) - the ad has been rendered, irregardless if it has been seen by the user or not. Can be triggered if the add is outside of the viewport
 * viewable(percentage:url:data:) At least 1%/50%/100% of the Ad has been actually seen by the user
-
+* showingAsset(id:,url:,metadata:) – the renderer is currently showing a particular asset
+* customRendererEvent(name:,url:, metadata:) – signals that the renderer has passed a custom event
 
 You can observe them like this:
 
 ```swift
 
-        ad.statePublisher
-            .sink { [weak self] state in
-                guard let self else { return }
-
-                print("State: \(state)")
-
-                switch state {
-                case .loading, .caching:
-                    self.state = .loading
-
-                case .readyToPresent(let metadata):
-                    if let metadata {
-			print(metadata)
-		    }
-
-                    self.state = .view
-
-                case .error(let error):
-                    guard self.retryCount >= C.maxRepeatCount else {
-                        self.retryCount += 1
-                        self.ad.reload()
-                        return
-                    }
-
-                    guard let error = error as? AdError else { return }
-
-                    self.state = .error(error.description)
-
-                @unknown default: break
-                }
+// Combine interface
+ad.statePublisher
+    .sink { [weak self] state in
+        guard let self else { return }
+        
+        print("State: \(state)")
+        
+        switch state {
+        case .loading, .caching:
+            self.state = .loading
+            
+        case .readyToPresent(let metadata):
+            if let metadata {
+                print(metadata)
             }
-            .store(in: &subscriptions)
-
-        ad.eventPublisher
-            .sink { event in
-                print("Event: \(event)")
+            
+            self.state = .view
+            
+        case .error(let error):
+            guard self.retryCount >= C.maxRepeatCount else {
+                self.retryCount += 1
+                self.ad.reload()
+                return
             }
-            .store(in: &subscriptions)
+            
+            guard let error = error as? AdError else { return }
+            
+            self.state = .error(error.description)
+            
+        @unknown default: break
+        }
     }
+    .store(in: &subscriptions)
+
+ad.eventPublisher
+    .sink { event in
+        print("Event: \(event)")
+    }
+    .store(in: &subscriptions)
+
+// Async Await interface
+Task {
+    for await state in ad.stateStream {
+        print("State: \(state)")
+
+        await MainActor.run {
+            switch state {
+            case .loading, .caching:
+                self.state = .loading
+
+            case .readyToPresent(let metadata):
+                self.state = .view
+                print("Metadata: \(metadata)")
+
+            case .error(let error):
+                guard self.retryCount >= C.maxRepeatCount else {
+                    self.retryCount += 1
+                    self.ad.reload()
+                    return
+                }
+
+                guard let error = error as? AdError else { return }
+
+                self.state = .error(error.description)
+            }
+        }
+    }
+}
+
+Task {
+    for await event in ad.eventStream {
+        print("Event: \(event)")
+    }
+}
 
 ```
 
@@ -227,7 +360,3 @@ var body: some View {
 You can find the documentation here: https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/documentation/adsdkcore/
 
 **Note:** if your experience “cannot load page” errors when navigating between entries in this documentation, then the culprit is very likely an activated ad blocker. Many of the documented classes and services have names related to advertising terms. We found that this can trigger ad blockers. So please disable your adblocker if you have issues.
-
-
-
-
