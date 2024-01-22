@@ -42,13 +42,15 @@ jobs:
   deploy_docs:
     name: Deploy Docs
     runs-on: ubuntu-latest
+    needs: update_swift_package
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Get docs artifact
-        uses: actions/download-artifact@v4
+        uses: dsaltares/fetch-gh-release-asset@master
         with:
-          name: docs
+          file: "docs.zip"
+          token: ${{ secrets.GH_TOKEN }}
       - name: Switch to gh_pages branch
         run: git checkout -B gh_pages
       - name: Update docs folder
