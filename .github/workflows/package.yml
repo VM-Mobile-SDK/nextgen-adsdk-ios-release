@@ -64,6 +64,10 @@ jobs:
           rm docs.zip
       - name: Commit and push changes to gh_pages
         run: |
+          git config --global user.email "mail@example.com"
+          git config --global user.name "swift package deployer"
           git add .
           git commit -m "Update docs"
-          git push -u origin gh_pages
+          git push -u origin gh_pages --force-with-lease
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
