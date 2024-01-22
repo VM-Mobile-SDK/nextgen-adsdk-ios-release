@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  get_artifact_url:
+  update_swift_package:
     name: Update Swift Package
     runs-on: macos-latest
     steps:
@@ -25,7 +25,7 @@ jobs:
           echo "::endgroup::"
           
           echo "::group::update_package.sh"
-          sh ./update_package.sh $release_tag AdSDKCore AdSDKCore.xcframework.zip AdSDKSwiftUI AdSDKSwiftUI.xcframework.zip
+          sh ./update_package.sh $release_tag AdSDKCore "AdSDKCore-$release_tag.zip" AdSDKSwiftUI "AdSDKSwiftUI-$release_tag.zip"
           echo "::endgroup::"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -39,4 +39,29 @@ jobs:
           tag: ${{ env.tag }} --force
           push: origin HEAD:main
           tag_push: --force
-          
+  deploy_docs:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Get docs artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docs
+      - name: Switch to gh_pages branch
+        run: git checkout -B gh_pages
+      - name: Update docs folder
+        run: |
+          if [ -d "docs" ]; then
+            echo "Directory 'docs' already exists."
+            rm -rf docs
+          fi
+
+          unzip -q docs.zip -d docs
+          rm docs.zip
+      - name: Commit and push changes to gh_pages
+        run: |
+          git add .
+          git commit -m "Update docs"
+          git push -u origin gh_pages
