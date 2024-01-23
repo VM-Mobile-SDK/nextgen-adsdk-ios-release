@@ -52,7 +52,9 @@ jobs:
           file: "docs.zip"
           token: ${{ secrets.GH_TOKEN }}
       - name: Switch to pages_test branch
-        run: git checkout -B pages_test
+        run: |
+          git checkout -B pages_test
+          git pull origin pages_test
       - name: Update docs folder
         run: |
           if [ -d "docs" ]; then
