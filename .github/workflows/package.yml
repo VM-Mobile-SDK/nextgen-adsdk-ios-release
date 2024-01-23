@@ -62,11 +62,12 @@ jobs:
 
           unzip -q docs.zip -d docs
           rm docs.zip
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: swift package deployer
-          author_email: mail@example.com
-          message: 'Documentation updated'
-          add: '.'
-          push: origin HEAD:pages_test
+      - name: Commit and push changes to gh_pages
+        run: |
+          git config --global user.email "mail@example.com"
+          git config --global user.name "swift package deployer"
+          git add .
+          git commit -m "Update docs"
+          git push -u origin gh_pages
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
