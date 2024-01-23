@@ -42,7 +42,6 @@ jobs:
   deploy_docs:
     name: Deploy Docs
     runs-on: ubuntu-latest
-    needs: update_swift_package
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,8 +50,8 @@ jobs:
         with:
           file: "docs.zip"
           token: ${{ secrets.GH_TOKEN }}
-      - name: Switch to gh_pages branch
-        run: git checkout -B gh_pages
+      - name: Switch to pages_test branch
+        run: git checkout -B pages_test
       - name: Update docs folder
         run: |
           if [ -d "docs" ]; then
@@ -62,12 +61,11 @@ jobs:
 
           unzip -q docs.zip -d docs
           rm docs.zip
-      - name: Commit and push changes to gh_pages
-        run: |
-          git config --global user.email "mail@example.com"
-          git config --global user.name "swift package deployer"
-          git add .
-          git commit -m "Update docs"
-          git push -u origin gh_pages --force-with-lease
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: swift package deployer
+          author_email: mail@example.com
+          message: 'Documentation updated'
+          add: '.'
+          push: true
