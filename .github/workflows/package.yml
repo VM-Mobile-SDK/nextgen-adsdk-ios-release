@@ -53,8 +53,10 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - name: Switch to pages_test branch
         run: |
+          git config --global user.email "mail@example.com"
+          git config --global user.name "swift package deployer"
           git checkout -B pages_test
-          git pull origin pages_test
+          git pull --rebase origin pages_test
       - name: Update docs folder
         run: |
           if [ -d "docs" ]; then
@@ -66,8 +68,6 @@ jobs:
           rm docs.zip
       - name: Commit and push changes to gh_pages
         run: |
-          git config --global user.email "mail@example.com"
-          git config --global user.name "swift package deployer"
           git add .
           git commit -m "Update docs"
           git push -u origin pages_test
