@@ -69,4 +69,4 @@ jobs:
           author_email: mail@example.com
           message: 'Documentation updated'
           add: '.'
-          push: true
+          push: origin HEAD:pages_test
