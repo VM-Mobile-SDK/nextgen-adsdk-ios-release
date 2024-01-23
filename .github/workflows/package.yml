@@ -55,6 +55,7 @@ jobs:
         run: |
           git config --global user.email "mail@example.com"
           git config --global user.name "swift package deployer"
+          git fetch origin pages_test:pages_test
           git checkout pages_test
           git pull --rebase origin pages_test
       - name: Update docs folder
