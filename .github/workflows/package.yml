@@ -60,12 +60,8 @@ jobs:
           git pull --rebase origin pages_test
       - name: Update docs folder
         run: |
-          if [ -d "docs" ]; then
-            echo "Directory 'docs' already exists."
-            rm -rf docs
-          fi
-
-          unzip -q docs.zip -d docs
+          rm -r docs
+          unzip docs.zip -d ./
           rm docs.zip
       - name: Commit and push changes to gh_pages
         run: |
