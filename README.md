@@ -169,7 +169,7 @@ extension AppDelegate {
             .sink { [unowned self] completion in
                 switch completion {
                 case .failure(let error):
-						stateSubject.send(.error(error.localizedDescription))
+		    stateSubject.send(.error(error.localizedDescription))
 
                 case .finished:
                     print("Config: AdService configured")
