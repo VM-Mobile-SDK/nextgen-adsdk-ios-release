@@ -17,9 +17,9 @@ Xcode will then add the package as a dependency.
 
 Starting with IOS 14, you, as a developer, are required to ask for permission to track a user. Learn more in Apple's [documentation](https://developer.apple.com/app-store/user-privacy-and-data-use).
 
-The SDK tracks user behaviour, such as the percentage of an advert visibility on scroll or if an advert is tapped. At the moment, the SDK cannot work when a user is not allowed to be tracked. If you try to use the SDK without the user's consent to tracking, you will receive an `AdError/trackingDisabled` error.
+The SDK offers a wide range of functionality that can be used for tracking. If you use tracking in your application, you are responsible for adding a privacy manifest to your project. Learn more in Apple's [documentation](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests).
 
-In addition, the SDK offers a wide range of customisation options for building targeted ads. If you use additional user data when creating ads or for tracking purposes, you are responsible for adding the Privacy Manifest to your project. Learn more in Apple's [documentation](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests).
+You can use the following domain as a tracking domain: `adition.com`. Keep in mind that when using this domain, if the user denies access to tracking, the SDK will not work.
 
 ## Using the SDK
 
