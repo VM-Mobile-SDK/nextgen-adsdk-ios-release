@@ -17,9 +17,13 @@ Xcode will then add the package as a dependency.
 
 Starting with IOS 14, you, as a developer, are required to ask for permission to track a user. Learn more in Apple's [documentation](https://developer.apple.com/app-store/user-privacy-and-data-use).
 
-The SDK offers a wide range of functionality that can be used for tracking. If you use tracking in your application, you are responsible for adding a privacy manifest to your project. Learn more in Apple's [documentation](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests).
+The SDK offers a wide range of functionality that can be used for tracking. If you use tracking in your application, you are responsible for:
 
-You can use the following domain as a tracking domain: `adition.com`. Keep in mind that when using this domain, if the user denies access to tracking, the SDK will not work.
+**1. Adding a privacy manifest to your project.**
+Learn more in Apple’s documentation. Apple requires some kind of domain related to tracking. You can use the following domain as a tracking domain: `adition.com`.
+
+**2. Passing isOptOutEnabled.**
+Even if the user denies the tracking, IOS will not block URL requests for `adition.com` domain from the SDK. In addition to adding this domain to the privacy manifest, you should pass the `isOptOutEnabled` parameter to the SDK if the user has denied tracking. You can do this using the `AdService/setGlobalParameter(_:_:)` method.
 
 ## Using the SDK
 
