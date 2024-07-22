@@ -1,0 +1,10 @@
+						AdSDK License
+
+	This SDK is provided by Virtual Minds GmbH and is intended for use by authorized clients
+	only. To use this SDK, you must have a valid Network ID and Content Unit IDs provided by
+	Virtual Minds GmbH.
+
+	Redistribution and use in source and binary forms, with or without modification, are not
+	permitted without explicit permission from Virtual Minds GmbH.
+	
+	For further details, please contact igor.volk@virtualminds.com.
