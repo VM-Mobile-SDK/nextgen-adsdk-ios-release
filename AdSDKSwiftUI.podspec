@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
                             DESC
   s.homepage              = "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release"
   s.license               = { :type => "custom", :file => "LICENSE.txt" }
-  s.author                = { "Virtual Minds GmbH" => "igor.volk@virtualminds.com" }
+  s.author                = { "Virtual Minds GmbH" => "mobilesdk@virtualminds.com" }
   s.ios.deployment_target = '14.0'
   s.source                = { :http => "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release/releases/download/5.4.0/AdSDKSwiftUI-5.4.0.zip" }
   

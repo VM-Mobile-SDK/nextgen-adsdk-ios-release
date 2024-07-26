@@ -1,17 +1,36 @@
 # nextgen-adsdk-ios-release
-This package contains the frameworks for using Aditions nextgen AdSDK for iOS.
+This repo contains the frameworks for using Aditions nextgen AdSDK for iOS.
 
 ## Authorization
 
 The Repo has been marked "public", so no authentication or authorization needed.
 
-## Adding the package
+## Installation
+
+### Swift Package
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
 
 1. In Xcode, select "Add Package" from the File menu. 
 1. In the dialogue, paste the URL to this repo. 
 1. Make sure to only include the base URL, e.g. `https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release`
 	
 Xcode will then add the package as a dependency.
+
+### Cocoapods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Swift and Objective-C Cocoa projects.
+
+To integrate AdSDK into your project, you need to add it to your `Podfile`, for example:
+```ruby
+platform :ios, '14.0'
+use_frameworks!
+
+target 'MyApp' do
+  pod 'AdSDKCore', '~> 5.4'
+  pod 'AdSDKSwiftUI', '~> 5.4'
+end
+```
 
 ## Documentation
 
