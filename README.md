@@ -15,6 +15,6 @@ Xcode will then add the package as a dependency.
 
 ## Documentation
 
-You can learn more about how to work with the SDK in the [documentation](https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/documentation/adsdkcore/). You can also follow a series of [interactive tutorials](https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/tutorials/meet-adsdk) that will show you how to integrate the SDK into a new application.
+You can learn more about how to work with the SDK in the [documentation](https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/). You can also follow a series of interactive tutorials that will show you how to integrate the SDK into a new application.
 
 **Note:** if your experience “cannot load page” errors when navigating between entries in this documentation, then the culprit is very likely an activated ad blocker. Many of the documented classes and services have names related to advertising terms. We found that this can trigger ad blockers. So please disable your adblocker if you have issues.
