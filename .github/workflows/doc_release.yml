@@ -20,15 +20,16 @@ jobs:
           artifact_id="${{ github.event.client_payload.artifact_id }}"
           api_url="https://api.github.com/repos/$repo_owner/$repo_name/actions/artifacts/$artifact_id/zip"
           doc_version="${{ github.event.client_payload.release_number }}"
-          output="./docs/${{ github.event.client_payload.release_number }}.zip"
 
           curl -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "$api_url" -o "$output" || exit 1
-
-          unzip "$output" && rm "$output"
+            "$api_url" -o "doc.zip" || exit 1
+            
+          unzip -o "doc.zip"
+          unzip -o "$doc_version.zip" -d "docs/"
+          rm "doc.zip" & rm "$doc_version.zip"
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
