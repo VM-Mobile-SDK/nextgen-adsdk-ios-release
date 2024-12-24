@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Update package
         id: update_package
         run: |
@@ -30,8 +30,8 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: swift package deployer
-          author_email: mail@example.com
+          author_name: mobilesdk
+          author_email: mobilesdk@virtualminds.com
           message: 'Updated swift package definition'
           add: 'Package.swift'
           tag: ${{ env.tag }} --force

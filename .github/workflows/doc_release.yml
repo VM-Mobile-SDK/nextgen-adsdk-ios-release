@@ -1,4 +1,4 @@
-name: Update & Deploy Documentation
+name: Update Documentation
 on: 
   repository_dispatch:
     types: [doc-update-trigger]
@@ -6,16 +6,13 @@ permissions:
   contents: write
 jobs:
   doc_update:
-    name: Process zip doc archive
+    name: Update documentation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           ref: gh_pages_test
-      - name: Check branch
-        run: |
-          git branch --show-current
       - name: Load documentation
         run: |
           repo_owner="VM-Mobile-SDK"
@@ -32,8 +29,9 @@ jobs:
             "$api_url" -o "$output" || exit 1
 
           unzip "$output" && rm "$output"
-      - name: Upload doc for test
-        uses: actions/upload-artifact@v4
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
         with:
-          name: ${{ github.event.client_payload.release_number }}
-          path: "./docs/${{ github.event.client_payload.release_number }}"
+          author_name: mobilesdk
+          author_email: mobilesdk@virtualminds.com
+          message: 'Documentation updated'
