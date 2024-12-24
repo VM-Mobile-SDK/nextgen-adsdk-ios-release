@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Load documentation
         run: |
-          curl -L -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.client_payload.doc_artifact_url }}" -o "new_doc"
+          curl -L -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.client_payload.doc_artifact_url }}" -o "new_doc" || exit 1
 
           if [ $? -eq 0 ]; then
             echo "✅ Documentation is loaded"
