@@ -1,0 +1,28 @@
+name: Update & Deploy Documentation
+on: 
+  repository_dispatch:
+    types: [doc-update-trigger]
+permissions:
+  contents: write
+jobs:
+  doc_update:
+    name: Process zip doc archive
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Load documentation
+        run: |
+          curl -L -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.client_payload.doc_artifact_url }}" -o "${{ github.event.client_payload.release_number }}.zip"
+
+          if [ $? -eq 0 ]; then
+            echo "✅ Documentation is loaded"
+          else
+            echo "❌ Error during documentation loading"
+            exit 1
+          fi
+      - name: Upload doc for test
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.client_payload.release_number }}
+          path: ./${{ github.event.client_payload.release_number }}.zip
