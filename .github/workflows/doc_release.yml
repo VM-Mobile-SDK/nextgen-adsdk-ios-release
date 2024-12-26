@@ -33,7 +33,7 @@ jobs:
       - name: Update documentation
         run: |
           cd scripts
-          sh update_doc_versions.sh 5
+          bash update_doc_versions.sh 5
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
