@@ -30,6 +30,10 @@ jobs:
           unzip -o "doc.zip"
           unzip -o "$doc_version.zip" -d "docs/"
           rm "doc.zip" & rm "$doc_version.zip"
+      - name: Update documentation
+        run: |
+          cd scripts
+          sh update_doc_versions.sh 5
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
