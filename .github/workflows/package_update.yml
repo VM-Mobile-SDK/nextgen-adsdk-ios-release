@@ -13,7 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Update package
-        id: update_package
         run: |
           echo "::group::determining release tag"
           ref=${{ github.ref }} 
@@ -23,7 +22,8 @@ jobs:
           echo "::endgroup::"
           
           echo "::group::update_package.sh"
-          sh ./update_package.sh $release_tag AdSDKCore "AdSDKCore-$release_tag.zip" AdSDKSwiftUI "AdSDKSwiftUI-$release_tag.zip"
+          cd scripts
+          sh update_package.sh $release_tag AdSDKCore "AdSDKCore-$release_tag.zip" AdSDKSwiftUI "AdSDKSwiftUI-$release_tag.zip"
           echo "::endgroup::"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
