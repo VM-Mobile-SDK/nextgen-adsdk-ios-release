@@ -50,7 +50,7 @@ echo "ℹ️ URL for swiftUI asset: $swiftUIUrl"
 assets=("$coreAssetName" "$swiftUIAssetName")
 
 for asset in "${assets[@]}"; do
-    gh release download "$release" -p "$asset" --clobber
+    gh release download "$release" -p "$asset" --clobber --dir ../
 
     if [[ $? -ne 0 ]]; then
         echo "❌ Failed to download the asset $asset, aborting"
