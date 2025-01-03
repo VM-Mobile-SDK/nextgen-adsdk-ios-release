@@ -65,16 +65,23 @@ done
 cd ..
 touch Package.swift
 
-for asset in "${assets[@]}"; do
-    checksum="$(swift package compute-checksum "$asset")"
+coreChecksum="$(swift package compute-checksum $coreAssetName)"
 
-    if [ -z "$checksum" ]; then
-        echo "❌ Failed to calculate checksum for $asset"
-        exit 1
-    else
-        echo "ℹ️ Checksum for $asset: $checksum"
-    fi
-done
+if [ -z "$coreChecksum" ]; then
+    echo "❌ Failed to calculate checksum for $coreAssetName"
+    exit 1
+else
+	echo "ℹ️ Checksum for $coreAssetName: $coreChecksum"
+fi
+
+swiftUIChecksum="$(swift package compute-checksum $swiftUIAssetName)"
+
+if [ -z "$coreChecksum" ]; then
+    echo "❌ Failed to calculate checksum for $swiftUIAssetName"
+    exit 1
+else
+	echo "ℹ️ Checksum for $swiftUIAssetName: $swiftUIChecksum"
+fi
 
 # Now we need to put the url and the checksum in the Package.swift file.
 # We have a template for this and do a search/replace.
