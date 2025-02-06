@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdSDK Issue Report</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #FFFFFF;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .highlight {
+            color: #CCCCCC;
+            display: block;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-top: 20px;
+            color: #CCCCCC;
+        }
+
+        a {
+            color: #BB86FC;
+            text-decoration: none;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        .bold {
+            font-weight: 600;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>AdSDK Issue Report</h1>
+        <h4>Thank you for your contribution to improving the AdSDK.</h4>
+
+        <p>
+            Since we use private keys and identifiers when working with AdSDK, we accept private issue reports by email.
+        </p>
+        <p class="bold">To create an issue report, please:</p>
+
+        <ul>
+            <li>
+                Prepare any additional data you can provide us with: logs, stack traces, etc.
+                <span class="highlight">
+                    Please note that you don't have debug symbols if you use Swift Package Manager to integrate
+                    SDK.<br />
+                    If you need debug symbols to better understand the issue, you can request an SDK with them from us.
+                </span>
+            </li>
+            <li>
+                Prepare a demo app where we can reproduce the issue.
+                <span class="highlight">
+                    You can use our
+                    <a href="https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-issue-demo">template</a>
+                    as a starter project and edit it to reproduce the error.
+                </span>
+            </li>
+            <li>
+                <a
+                    href="mailto:mobilesdk@virtualminds.com?subject=iOS%20SDK%20issue%20report&body=-%20Description%3A%0A%0A-%20Expected%20behaviour%3A%0A%0A-%20Actual%20behaviour%3A%0A%0A-%20SDK%20version%3A%0A%0A-%20Device%3A%0AIf%20the%20issue%20occurs%20only%20on%20specific%20devices%2C%20you%20can%20specify%20them.%0A%0A-%20iOS%20version%3A%0AIf%20the%20issue%20occurs%20only%20on%20specific%20iOS%20versions%2C%20you%20can%20specify%20them.%0A%0A-%20Xcode%20version%3A%0AIf%20the%20issue%20is%20more%20related%20to%20development%20than%20production%2C%20you%20can%20specify%20the%20version%20of%20Xcode%20in%20which%20you%20are%20experiencing%20the%20problem.%0A%0A-%20Steps%20to%20reproduce%20the%20issue%3A%0ADescribe%20the%20steps%20we%20need%20to%20take%20to%20reproduce%20the%20issue.%0A%0A-%20Integration%20method%3A%0ASwift%20Package%20Manager%2C%20Nexus%2C%20or%20manual%20xcframework%20integration.%0A%0A-%20Attachments%3A%0AIt%20can%20include%20a%20crash%20report%2C%20logs%2C%20or%20other%20useful%20information.%0A%0AAlso%2C%20we%20need%20a%20demo%20app%20to%20reproduce%20the%20error.%20You%20can%20use%20our%20template%20as%20a%20starter%20project%20and%20edit%20it%20to%20reproduce%20the%20error%3A%0Ahttps%3A%2F%2Fgithub.com%2FVM-Mobile-SDK%2Fnextgen-adsdk-ios-issue-demo">
+                    Follow the link
+                </a>
+                and fill in as much information as possible.
+                <span class="highlight">
+                    In addition, don't forget to attach the demo app and the files described in the steps above.
+                </span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
