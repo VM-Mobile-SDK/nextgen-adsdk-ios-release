@@ -1,6 +1,9 @@
 blank_issues_enabled: false
 
 contact_links:
+  - name: Issue report
+    url: https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/issue_report.html
+    about: Report an issue with the AdSDK
   - name: Documentation
     url: https://vm-mobile-sdk.github.io/nextgen-adsdk-ios-release/
     about: Read the nextgen AdSDK documentation & tutorials
