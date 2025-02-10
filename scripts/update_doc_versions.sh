@@ -33,7 +33,9 @@ output_file="docs/index.html"
 version_list=""
 
 for folder in "${doc_version_folders[@]}"; do
-  version_list+="<li><a href=\"$folder/documentation/adsdkcore/\">SDK v.$folder</a></li>\n"
+  # short_version used to trim last 0 character. For example 6.0.0 > 6.0
+  short_version=$(echo "$folder" | sed -E 's/([0-9]+\.[0-9]+)\.0$/\1/')
+  version_list+="<li><a href=\"$folder/documentation/adsdkcore/\">SDK v.$short_version</a></li>\n"
 done
 
 if [ ! -f "$template_file" ]; then
