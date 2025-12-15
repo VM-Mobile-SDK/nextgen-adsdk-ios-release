@@ -15,7 +15,7 @@ cd ..
 
 # Find all the folders with different versions of the doc, and sort them.
 versions_count=$1
-doc_version_folders=($(find docs -type d -name "[0-9].[0-9].[0-9]" | awk -F/ '{print $NF}' | sort -Vr))
+doc_version_folders=($(find docs -type d -regex ".*/[0-9]+\.[0-9]+\.[0-9]+" | awk -F/ '{print $NF}' | sort -Vr))
 
 # Remove oldest doc versions if size is bigger than passed.
 if [ ${#doc_version_folders[@]} -gt $versions_count ]; then
@@ -35,7 +35,7 @@ version_list=""
 for folder in "${doc_version_folders[@]}"; do
   # short_version used to trim last 0 character. For example 6.0.0 > 6.0
   short_version=$(echo "$folder" | sed -E 's/([0-9]+\.[0-9]+)\.0$/\1/')
-  version_list+="<li><a href=\"$folder/documentation/adsdkcore/\">SDK v.$short_version</a></li>\n"
+  version_list+="<li>SDK v.$short_version – <a href=\"$folder/documentation/adsdkcore/\">documentation</a> \&amp; <a href=\"$folder/tutorials/meet-adsdk/\">tutorial</a>.</li>\n"
 done
 
 if [ ! -f "$template_file" ]; then
